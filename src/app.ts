@@ -1,26 +1,18 @@
 import { ApolloServer } from 'apollo-server-express'
 import * as Express from 'express'
-import { buildSchema, Query, Resolver } from 'type-graphql'
+import { buildSchema } from 'type-graphql'
 import 'reflect-metadata'
+import { createConnection } from 'typeorm'
+import { RegisterResolver } from './modules/user/resolver/user'
 require('dotenv').config()
 
-// Creating a sample resolver
-@Resolver()
-class HelloResolver {
-  @Query(() => String, {
-    name: 'hello',
-    description: 'This is a sample resolver',
-    nullable: true,
-  })
-  async helloWorld() {
-    return 'Hello World from Hello Resolver 😄'
-  }
-}
-
 const main = async () => {
+  // connect to postgres
+  await createConnection()
+
   // gql schema
   const schema = await buildSchema({
-    resolvers: [HelloResolver],
+    resolvers: [RegisterResolver],
   })
 
   // Init apolloServer
