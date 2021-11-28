@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server-express'
-import * as Express from 'express'
+import Express from 'express'
 import { buildSchema } from 'type-graphql'
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
-import { RegisterResolver } from './modules/user/resolver/user'
+import { RegisterResolver } from './modules/user/register/resolvers/Register'
 require('dotenv').config()
 
 const main = async () => {
@@ -35,7 +35,7 @@ const main = async () => {
   //starting server
   app.listen(process.env.PORT, () =>
     console.log(
-      `Apollo server started on http://localhost:${process.env.PORT}/graphql`
+      `🚀 Apollo server started 🟢 on http://localhost:${process.env.PORT}/graphql`
     )
   )
 }
