@@ -50,3 +50,14 @@ export class RegisterResolver {
     return `${User.firstName} ${User.lastName}`
   }
 ```
+
+4. We can achieve the same result as above by just adding another field in an User entity. This field will not be saved in database. This will work as getter function
+
+```typescript
+  @Field()
+  fullName(@Root() parent: User): string {
+    return `${parent.firstName} ${parent.lastName}`
+  }
+```
+
+5. **Custom validator** using class validator we can create custom validator for our specific useCase just like we did in **isEmailAvailable** validator. We can add custom message in a response.
