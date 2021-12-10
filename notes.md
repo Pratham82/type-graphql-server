@@ -61,3 +61,22 @@ export class RegisterResolver {
 ```
 
 5. **Custom validator** using class validator we can create custom validator for our specific useCase just like we did in **isEmailAvailable** validator. We can add custom message in a response.
+
+6. **context**: Here we are passing the function in context key, which will create a context that can be used in the resolver. ApolloServer gives us access to the request object, which is from express and we can access the session data based on this.
+
+```typescript
+// Init apolloServer
+const apolloServer = new ApolloServer({
+  schema,
+  context: ({ req }) => ({ req }),
+})
+```
+
+For actually accessing the context in the resolver we have to create a type of context and return the required fields. In this case required the request object in the context so we will add the request object in the interface.
+
+```typescript
+import {Request}  form 'express'
+export interface MyContext{
+  req: Request
+}
+```
