@@ -10,6 +10,7 @@ import cors from 'cors'
 
 import { RegisterResolver } from './modules/user/register/resolvers/Register'
 import { LoginResolver } from './modules/user/login/resolvers/Login'
+import { MeResolver } from './modules/user/me'
 
 require('dotenv').config()
 
@@ -19,7 +20,7 @@ const main = async () => {
 
   // gql schema
   const schema = await buildSchema({
-    resolvers: [RegisterResolver, LoginResolver],
+    resolvers: [MeResolver, RegisterResolver, LoginResolver],
   })
 
   // Init apolloServer
