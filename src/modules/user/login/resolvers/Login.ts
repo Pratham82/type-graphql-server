@@ -27,7 +27,8 @@ export class LoginResolver {
       }
     }
 
-    ctx.req.session.userId = user.id
+    // creating a session in redis
+    ctx.req.session!.userId = user.id
 
     return user
   }
