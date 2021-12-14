@@ -21,6 +21,9 @@ const main = async () => {
   // gql schema
   const schema = await buildSchema({
     resolvers: [MeResolver, RegisterResolver, LoginResolver],
+    authChecker: ({ context: { req } }) => {
+      return !!req.session.userId
+    },
   })
 
   // Init apolloServer
