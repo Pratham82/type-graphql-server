@@ -1,11 +1,14 @@
-import { Resolver, Query, Mutation, Arg } from 'type-graphql'
+import { Resolver, Query, Mutation, Arg, UseMiddleware } from 'type-graphql'
 import brcypt from 'bcryptjs'
 import { User } from '../../../../entity/User'
 import { RegisterInput } from '../inputs/Register'
+import { isAuth } from '../../../middleware/isAuth'
+import { logger } from '../../../middleware/logger'
 
 // Creating a sample resolver
 @Resolver()
 export class RegisterResolver {
+  @UseMiddleware(isAuth, logger)
   @Query(() => String, {
     name: 'hello',
     description: 'This is a sample resolver',
